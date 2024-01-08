@@ -1,3 +1,53 @@
+-- Create Departments table
+CREATE TABLE Departments (
+    department_id INT PRIMARY KEY,
+    department_name VARCHAR(255) NOT NULL,
+    location VARCHAR(255)
+);
+
+-- Create Employees table with a foreign key referencing Departments table
+CREATE TABLE Employees (
+    employee_id INT PRIMARY KEY,
+    employee_name VARCHAR(255) NOT NULL,
+    department_id INT,
+    FOREIGN KEY (department_id) REFERENCES Departments(department_id)
+);
+
+-- Populate Departments table with sample data
+INSERT INTO Departments (department_id, department_name, location)
+VALUES 
+    (1, 'HR', 'New York'),
+    (2, 'Finance', 'Los Angeles'),
+    (3, 'Marketing', 'Chicago');
+
+-- Populate Employees table with sample data
+INSERT INTO Employees (employee_id, employee_name, department_id)
+VALUES
+    (101, 'John Smith', 1),
+    (102, 'Jane Doe', 1),
+    (103, 'Mike Johnson', 2),
+    (104, 'Anna White', 2),
+    (105, 'Chris Miller', 3),
+    (106, 'David Wilson', NULL);
+
+-- Task 1: Add a new department called 'IT' and assign an employee to it
+INSERT INTO Departments (department_id, department_name, location)
+VALUES (4, 'IT', NULL);
+
+UPDATE Employees
+SET department_id = 4
+WHERE employee_id = 106;
+
+-- Task 2: Update the location of the 'HR' department from 'New York' to 'Chicago'
+UPDATE Departments
+SET location = 'Chicago'
+WHERE department_name = 'HR';
+
+-- Task 3: Delete the employee named 'Michael Brown' from the Employees table
+DELETE FROM Employees
+WHERE employee_name = 'Michael Brown';
+
+
 Exercise Description:
 Suppose we have two tables: Employees and Departments. The Employees table contains information about company employees, and the Departments table contains details about different departments within the company. You are tasked with creating these tables and establishing a relationship between them using primary and foreign keys.
 
